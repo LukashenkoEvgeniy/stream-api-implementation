@@ -3,8 +3,7 @@ package ua.procamp.streams.stream;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class AsIntStreamTest {
 
@@ -32,7 +31,7 @@ public class AsIntStreamTest {
         System.out.println("stream - toArray");
         int[] streamToArray = intStream.toArray();
         boolean ifArray = streamToArray.getClass().isArray();
-        assertEquals(ifArray, true);
+        assertTrue(ifArray);
     }
 
     @Test
@@ -40,7 +39,7 @@ public class AsIntStreamTest {
         System.out.println("stream - forEach");
         String expResult = "-10123";
         StringBuilder str = new StringBuilder();
-        intStream.forEach(x -> str.append(x));
+        intStream.forEach(str::append);
         assertEquals(expResult, str.toString());
     }
 
@@ -137,6 +136,4 @@ public class AsIntStreamTest {
                 .toArray();
         assertArrayEquals(expResult, result);
     }
-
-
 }
