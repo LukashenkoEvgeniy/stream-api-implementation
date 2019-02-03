@@ -3,8 +3,6 @@ package ua.procamp.streams;
 import ua.procamp.streams.stream.AsIntStream;
 import ua.procamp.streams.stream.IntStream;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class StreamApp {
 
@@ -27,30 +25,5 @@ public class StreamApp {
         StringBuilder str = new StringBuilder();
         intStream.forEach(x -> str.append(x));
         return str.toString();
-    }
-
-
-
-
-
-
-    public static int localTest(IntStream intStream) {
-        IntStream stream = AsIntStream.of(-1, 0, 1, 2, 3); // input values
-        stream.filter(x -> x > 0);
-
-        int[] a = AsIntStream.of(-1, 0, 1, 2, 3).filter(x -> x > 0).toArray();
-        System.out.println(a[0]);
-        System.out.println(a[1]);
-//
-
-        return 1;
-    }
-
-
-    @Override
-    public String toString() {
-        List list = new ArrayList();
-        list.stream();
-        return super.toString();
     }
 }

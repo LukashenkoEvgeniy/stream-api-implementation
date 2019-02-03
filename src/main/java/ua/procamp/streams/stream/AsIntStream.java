@@ -1,7 +1,9 @@
 package ua.procamp.streams.stream;
 import ua.procamp.streams.function.*;
+import ua.procamp.streams.iterables.FilterIterable;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import static ua.procamp.streams.utils.ArrayUtils.combine;
 import static ua.procamp.streams.utils.ArrayUtils.convertArrayListtoArray;
@@ -9,6 +11,7 @@ import static ua.procamp.streams.utils.ArrayUtils.convertArrayListtoArray;
 public class AsIntStream implements IntStream {
 
     private int[] values;
+    private ArrayList<Iterable> iterables = new ArrayList<>();
 
     private AsIntStream(int... values) {
         this.values = values;
@@ -42,9 +45,26 @@ public class AsIntStream implements IntStream {
         return reduce(values[0], (min, nextValue) -> nextValue < min ? nextValue : min);
     }
 
-    @Override
+    public AsIntStream lazyComputing() {
+        ArrayList arrayList = new ArrayList();
+        if(iterables.size() > 0){
+            iterables.forEach(iterable -> {
+                Iterator iterator =  iterable.iterator();
+                //TODO There are you need result of interator loop insert into next iterator
+                while (iterator.hasNext()){
+                    arrayList.add(iterator.next());
+                }
+            });
+            return new AsIntStream(convertArrayListtoArray(arrayList));
+        }
+        return this;
+    }
+
+
+        @Override
     public long count() {
-        return values.length;
+        AsIntStream lazyComputedResult = lazyComputing();
+        return lazyComputedResult.toArray().length;
     }
 
     @Override
@@ -57,14 +77,9 @@ public class AsIntStream implements IntStream {
 
     @Override
     public IntStream filter(IntPredicate predicate) {
-        ArrayList<Integer> resultArray = new ArrayList<>();
-        this.forEach(value -> {
-            boolean test = predicate.test(value);
-            if (test) {
-                resultArray.add(value);
-            }
-        });
-        return new AsIntStream(convertArrayListtoArray(resultArray));
+        FilterIterable filterIterable = new FilterIterable(values, predicate);
+        iterables.add(filterIterable);
+        return this;
     }
 
     @Override

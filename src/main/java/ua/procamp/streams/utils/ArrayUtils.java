@@ -20,4 +20,14 @@ public class ArrayUtils{
             System.arraycopy(b, 0, result, a.length, b.length);
             return result;
         }
+
+        public static Integer[] convertIntToIntegerArrray(int[] incomingIntArray){
+            Integer[] integerArray = new Integer[incomingIntArray.length];
+            int i = 0;
+            for (int value : incomingIntArray) {
+                integerArray[i++] = value;
+            }
+            return integerArray;
+        }
+
 }
