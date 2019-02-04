@@ -4,7 +4,7 @@ import ua.procamp.streams.function.*;
 import java.util.ArrayList;
 
 import static ua.procamp.streams.utils.ArrayUtils.combine;
-import static ua.procamp.streams.utils.ArrayUtils.convertArrayListtoArray;
+import static ua.procamp.streams.utils.ArrayUtils.convertArrayListToArray;
 
 public class AsIntStream implements IntStream {
 
@@ -64,7 +64,7 @@ public class AsIntStream implements IntStream {
                 resultArray.add(value);
             }
         });
-        return new AsIntStream(convertArrayListtoArray(resultArray));
+        return new AsIntStream(convertArrayListToArray(resultArray));
     }
 
     @Override
@@ -80,7 +80,7 @@ public class AsIntStream implements IntStream {
         for (int value : values) {
             resultArray.add(mapper.apply(value));
         }
-        return new AsIntStream(convertArrayListtoArray(resultArray));
+        return new AsIntStream(convertArrayListToArray(resultArray));
 
     }
 

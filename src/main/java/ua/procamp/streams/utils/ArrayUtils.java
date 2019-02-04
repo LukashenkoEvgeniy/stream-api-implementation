@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class ArrayUtils{
-        public static int[] convertArrayListtoArray(List<Integer> integers) {
+        public static int[] convertArrayListToArray(List<Integer> integers) {
             int[] result = new int[integers.size()];
             Iterator<Integer> iterator = integers.iterator();
             for (int i = 0; i < result.length; i++) {
